@@ -1,6 +1,6 @@
 # GoNetic binary
 This repository contains a static binary of GoNetic for 64-bit linux.
-The content of this repository is only licensed for non-commercial academic use.
+The binary in this repository is only licensed for non-commercial academic use.
 
 ### requirements and setup
  - 64-bit linux
