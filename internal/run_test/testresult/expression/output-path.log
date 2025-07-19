@@ -1,0 +1,17 @@
+{"time":"2025-05-27T10:50:23.463393849+02:00","level":"INFO","msg":"Using CPUs","maxProcs":1,"numCPU":12}
+{"time":"2025-05-27T10:50:23.463404831+02:00","level":"INFO","msg":"Commmon arguments","":{"SkipAllocsProfiling":false,"SkipGoroutineProfiling":false,"SkipHeapProfiling":false,"Commit":"","OutputFolder":"testresult/expression","NetworkFiles":["testdata/network.csv"],"BannedNetworkFiles":null,"EtcPathAsString":"../../etc","MappingFile":"","NumCPU":1,"LogFormat":"","LogFile":"testresult/expression/output-path.log","Verbose":false,"TopologyWeightingAddition":"bayes","MinEdgeScore":0.7,"PathTypes":null,"PathLength":5,"BestPathCount":25,"SldCutoff":0,"MaxPaths":50,"NumGens":10,"EarlyTermination":true,"TimeLimitHours":0,"WindowCount":20,"MinWindowSize":2,"MaxWindowSize":100,"RequiredProgressPercentage":0.25,"MutChance":0.2,"PopSize":100,"OptimizeNetworkSize":true,"OptimizeSampleCount":true,"FocusFraction":0,"TargetNetworkSize":10,"SampleObjectiveType":"entropy","UseIndex":"","SkipPathFinding":false,"UsePaths":"","SkipCompilation":false,"UseNNFs":"","SkipOptimization":true,"SkipInterpreter":true,"SkipNetworkPrinting":false,"Resume":false,"Sem":1,"InteractionStore":{}}}
+{"time":"2025-05-27T10:50:23.463446546+02:00","level":"INFO","msg":"Finished reading data file","fileName":"expression","entries":5}
+{"time":"2025-05-27T10:50:23.463458585+02:00","level":"INFO","msg":"Finished reading data file","fileName":"differential expression","entries":3}
+{"time":"2025-05-27T10:50:23.467260991+02:00","level":"INFO","msg":"Running expression path finding"}
+{"time":"2025-05-27T10:50:23.467274548+02:00","level":"INFO","msg":"Processing samples in parallel.","samples":2,"parallelism":1}
+{"time":"2025-05-27T10:50:23.4682148+02:00","level":"INFO","msg":"network size","genes":15,"interactions":35,"interaction types":0}
+{"time":"2025-05-27T10:50:23.46822211+02:00","level":"INFO","msg":"network size","genes":15,"interactions":35,"interaction types":0}
+{"time":"2025-05-27T10:50:23.468226847+02:00","level":"INFO","msg":"converting StringLiner to file","tag":"sample1","filename":"testresult/expression/paths_5/expression/sample1.network"}
+{"time":"2025-05-27T10:50:23.468298383+02:00","level":"INFO","msg":"sldCutoff","sldCutoff":0}
+{"time":"2025-05-27T10:50:23.469219128+02:00","level":"INFO","msg":"network size","genes":15,"interactions":35,"interaction types":0}
+{"time":"2025-05-27T10:50:23.469228558+02:00","level":"INFO","msg":"network size","genes":15,"interactions":35,"interaction types":0}
+{"time":"2025-05-27T10:50:23.469232419+02:00","level":"INFO","msg":"converting StringLiner to file","tag":"sample2","filename":"testresult/expression/paths_5/expression/sample2.network"}
+{"time":"2025-05-27T10:50:23.469300626+02:00","level":"INFO","msg":"sldCutoff","sldCutoff":0}
+{"time":"2025-05-27T10:50:23.469680326+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample1","startGenes":1,"runTime":1,"maxToVisitSize":76}
+{"time":"2025-05-27T10:50:23.470323037+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample2","startGenes":2,"runTime":1,"maxToVisitSize":90}
+{"time":"2025-05-27T10:50:23.47042098+02:00","level":"INFO","msg":"Finished path finding","seconds":0.003150978}

@@ -1,0 +1,19 @@
+% pp non-regulatory
+FRS2,PIK3CD,pp,directed,0.9
+RALA,SRC,pp,directed,0.8
+ARAF,MAPK1,pp,directed,0.7
+ARAF,MAPK10,pp,directed,0.6
+ARAF,MAPK11,pp,directed,0.5
+ARAF,MAPK12,pp,directed,0.4
+ARAF,MAPK13,pp,directed,0.5
+ARAF,MAPK14,pp,directed,0.6
+ARAF,KRAS,pp,directed,0.7
+PIK3C3,PLCE1,pp,directed,0.8
+FRS2,PIK3C3,pp,directed,0.9
+PIK3CD,PLCE1,pp,directed,0.8
+SRC,FRS2,pp,directed,0.7
+KRAS,RALA,pp,directed,0.6
+MAPK3,FRS2,pp,directed,0.5
+MAPK1,FRS2,pp,directed,0.4
+KRAS,PLCE1,pp,directed,0.5
+ARAF,MAPK3,pp,directed,0.6

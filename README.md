@@ -1,14 +1,25 @@
-# GoNetic binary
-This repository contains a static binary of GoNetic for 64-bit linux.
-The binary in this repository is only licensed for non-commercial academic use.
+# GoNetic 2
+
+GoNetic 2 is a tool to identify subnetworks of interest in a gene interaction network using mutation and expression data. It applies NSGA-II optimization to select subnetworks that are both relevant to the omics data and consistent with the network structure.
+
+GoNetic 2 is a complete rewrite of the original tool. It introduces support for expression data and a revised subnetwork selection procedure. The core idea remains unchanged: omics data is mapped to a network; paths of interest are identified and compiled into a logical formula; subnetworks are then evaluated for the presence of these paths using that formula.
+
+The original GoNetic version (v1.0.0) is still available under tag `v1.0.0` in this repository.
+
+This repository contains a static binary of GoNetic for 64-bit linux, the source code is also provided.
+
+The binary and code in this repository is only licensed for non-commercial academic use.
 
 ### requirements and setup
- - 64-bit linux
+One of the following is required to run GoNetic:
+ - 64-bit linux to use the provided binary
+ - Go 1.23+ to build the source code, see [Go installation instructions](https://go.dev/doc/install) for details on how to install Go.
 
+The following additional requirements are needed to run GoNetic:
  - c2d compiler [1]:
    - We are in no way affiliated with the c2d project. See the c2d manual for licensing information of the c2d compiler: "The c2d compiler is licensed only for non–commercial, research and educational use."
    - Get the linux binary `c2d_linux` here: <http://reasoning.cs.ucla.edu/c2d/>, place it in the `etc/` directory, and set execution permissions (e.g. `chmod u+x c2d_linux`) 
-   - Install `libc6:i386` because the c2d binary is a 32-bit executable
+   - You might have to install `libc6:i386` or a similar compatibility library to run the c2d binary on your system, since it is a 32-bit binary.
 
 ### usage
 `./gonetic QTL -h`
@@ -50,10 +61,10 @@ A2M,APOA1,pp,directed,1.0
 A2M,BMP1,pp,directed,1.0
 ```
 
-The main output files are in the `output/resulting_networks` folder:
+The main output files are in the `output/resulting_networks/sample-norm` folder:
  - `d3js_visualization`: a html+js visualisation of the resulting network, tested in Firefox and Chromium-based browsers.
  - `weighted.network`: a tab separated file containing the resulting network. The same type of header lines as in the input network file, each entry now consists of two columns: (1) an unweighted interaction in the same format as the input network file, and (2) the highest edge penalty for which this interaction was selected in the subnetwork selection phase.
- - `rankedMutations.txt`: a tab separated file containing all genes that are in the resulting network that are also mutated in the input data. The rank of the gene is based on the highest edge penalty for which this gene was selected in the subnetwork selection phase, where rank "1" corresponds with the highest edge penalty that lead to a valid subnetwork.
+ - `conditionSpecificMutationRanking.txt`: a tab separated file containing all genes that are in the resulting network that are also mutated in the input data. The rank of the gene is based on the highest edge penalty for which this gene was selected in the subnetwork selection phase, where rank "1" corresponds with the highest edge penalty that lead to a valid subnetwork.
 
 ### references
 [1] Darwiche A. New advances in compiling CNF to decomposable negation normal form. Proc. of ECAI, 328-332  

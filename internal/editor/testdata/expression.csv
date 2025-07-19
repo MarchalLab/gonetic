@@ -1,0 +1,6 @@
+#condition,gene name,lfc
+Sample1,Y001,5
+Sample1,Y003,4
+Sample1,Y004,1
+Sample1,Y005,-4
+Sample1,Y006,-5

@@ -1,0 +1,6 @@
+#gene name,condition,lfc
+KRAS,sample1,3.4
+ARAF,sample1,2.3
+FRS2,sample2,1.2
+PIK3CD,sample2,2.1
+RALA,sample2,1.3

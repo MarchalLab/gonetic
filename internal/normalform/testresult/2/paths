@@ -1,0 +1,5 @@
+-aux_0 1;2;1 0
+-aux_0 2;3;1 0
+aux_0 -1;2;1 -2;3;1 0
+1;condition1 -aux_0 0
+-1;condition1 aux_0 0

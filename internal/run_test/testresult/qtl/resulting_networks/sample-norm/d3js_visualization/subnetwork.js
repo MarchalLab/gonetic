@@ -1,0 +1,37 @@
+graph = {
+genesOfInterest: [
+"mutation",
+],
+nodes: [
+{id:"PLCE1",samples: ["YA==",]},
+{id:"FRS2",samples: ["QA==",]},
+{id:"SRC",samples: ["",]},
+{id:"PIK3C3",samples: ["",]},
+{id:"KRAS",samples: ["oA==",]},
+{id:"RALA",samples: ["",]},
+{id:"PIK3CD",samples: ["",]},
+{id:"ARAF",samples: ["",]},
+{id:"MAPK1",samples: ["",]},
+],
+links: [
+{source:"ARAF", target:"MAPK1", type:"pp"},
+{source:"MAPK1", target:"FRS2", type:"pp"},
+{source:"PIK3C3", target:"PLCE1", type:"pp"},
+{source:"KRAS", target:"RALA", type:"pp"},
+{source:"FRS2", target:"PIK3C3", type:"pp"},
+{source:"FRS2", target:"PIK3CD", type:"pp"},
+{source:"FRS2", target:"SRC", type:"pp"},
+{source:"PIK3CD", target:"PLCE1", type:"pp"},
+{source:"RALA", target:"SRC", type:"pp"},
+{source:"SRC", target:"RALA", type:"pp"},
+{source:"KRAS", target:"ARAF", type:"pp"},
+{source:"RALA", target:"KRAS", type:"pp"},
+{source:"KRAS", target:"PLCE1", type:"pp"},
+{source:"SRC", target:"FRS2", type:"pp"},
+],
+conditions: [
+"sample1",
+"sample2",
+"sample3",
+],
+}

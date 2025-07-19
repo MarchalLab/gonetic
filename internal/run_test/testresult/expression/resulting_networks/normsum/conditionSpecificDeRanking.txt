@@ -1,0 +1,2 @@
+sample1
+sample2	FRS2 7.869998	PIK3CD 7.869998

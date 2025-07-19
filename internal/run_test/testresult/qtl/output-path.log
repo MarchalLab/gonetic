@@ -1,0 +1,15 @@
+{"time":"2025-05-27T10:50:23.691695896+02:00","level":"INFO","msg":"Using CPUs","maxProcs":1,"numCPU":12}
+{"time":"2025-05-27T10:50:23.691706362+02:00","level":"INFO","msg":"Commmon arguments","":{"SkipAllocsProfiling":false,"SkipGoroutineProfiling":false,"SkipHeapProfiling":false,"Commit":"","OutputFolder":"testresult/qtl","NetworkFiles":["testdata/network.csv"],"BannedNetworkFiles":null,"EtcPathAsString":"../../etc","MappingFile":"","NumCPU":1,"LogFormat":"","LogFile":"testresult/qtl/output-path.log","Verbose":false,"TopologyWeightingAddition":"bayes","MinEdgeScore":0.7,"PathTypes":null,"PathLength":5,"BestPathCount":25,"SldCutoff":0,"MaxPaths":50,"NumGens":10,"EarlyTermination":true,"TimeLimitHours":0,"WindowCount":20,"MinWindowSize":2,"MaxWindowSize":100,"RequiredProgressPercentage":0.25,"MutChance":0.2,"PopSize":100,"OptimizeNetworkSize":true,"OptimizeSampleCount":true,"FocusFraction":0,"TargetNetworkSize":10,"SampleObjectiveType":"entropy","UseIndex":"","SkipPathFinding":false,"UsePaths":"","SkipCompilation":false,"UseNNFs":"","SkipOptimization":true,"SkipInterpreter":true,"SkipNetworkPrinting":false,"Resume":false,"Sem":1,"InteractionStore":{}}}
+{"time":"2025-05-27T10:50:23.691736551+02:00","level":"INFO","msg":"Finished reading data file","fileName":"mutation","entries":5}
+{"time":"2025-05-27T10:50:23.695989281+02:00","level":"INFO","msg":"Running QTL pathfinding"}
+{"time":"2025-05-27T10:50:23.695998475+02:00","level":"INFO","msg":"frequency increase data per line entries","entries":5}
+{"time":"2025-05-27T10:50:23.696002757+02:00","level":"INFO","msg":"functional score data per line entries","entries":5}
+{"time":"2025-05-27T10:50:23.697418627+02:00","level":"INFO","msg":"network size","genes":15,"interactions":35,"interaction types":0}
+{"time":"2025-05-27T10:50:23.697425903+02:00","level":"INFO","msg":"network size","genes":15,"interactions":35,"interaction types":0}
+{"time":"2025-05-27T10:50:23.697445814+02:00","level":"INFO","msg":"converting StringLiner to file","tag":"qtl","filename":"testresult/qtl/paths_5/mutation/qtl.network"}
+{"time":"2025-05-27T10:50:23.697517122+02:00","level":"INFO","msg":"sldCutoff","sldCutoff":0}
+{"time":"2025-05-27T10:50:23.697568745+02:00","level":"INFO","msg":"Start processing","samples":3,"parallelism":1}
+{"time":"2025-05-27T10:50:23.697776545+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample1","startGenes":1,"runTime":0,"maxToVisitSize":16}
+{"time":"2025-05-27T10:50:23.698053978+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample2","startGenes":2,"runTime":0,"maxToVisitSize":28}
+{"time":"2025-05-27T10:50:23.698287178+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample3","startGenes":2,"runTime":0,"maxToVisitSize":28}
+{"time":"2025-05-27T10:50:23.698439078+02:00","level":"INFO","msg":"Finished path finding","seconds":0.002442629}

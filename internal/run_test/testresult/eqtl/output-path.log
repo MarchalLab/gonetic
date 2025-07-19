@@ -1,0 +1,45 @@
+{"time":"2025-05-27T10:50:21.590287567+02:00","level":"INFO","msg":"Using CPUs","maxProcs":1,"numCPU":12}
+{"time":"2025-05-27T10:50:21.590299442+02:00","level":"INFO","msg":"Commmon arguments","":{"SkipAllocsProfiling":false,"SkipGoroutineProfiling":false,"SkipHeapProfiling":false,"Commit":"","OutputFolder":"testresult/eqtl","NetworkFiles":["testdata/network.csv"],"BannedNetworkFiles":null,"EtcPathAsString":"../../etc","MappingFile":"","NumCPU":1,"LogFormat":"","LogFile":"testresult/eqtl/output-path.log","Verbose":false,"TopologyWeightingAddition":"bayes","MinEdgeScore":0.7,"PathTypes":null,"PathLength":5,"BestPathCount":25,"SldCutoff":0,"MaxPaths":50,"NumGens":10,"EarlyTermination":true,"TimeLimitHours":0,"WindowCount":20,"MinWindowSize":2,"MaxWindowSize":100,"RequiredProgressPercentage":0.25,"MutChance":0.2,"PopSize":100,"OptimizeNetworkSize":true,"OptimizeSampleCount":true,"FocusFraction":0,"TargetNetworkSize":10,"SampleObjectiveType":"entropy","UseIndex":"","SkipPathFinding":false,"UsePaths":"","SkipCompilation":false,"UseNNFs":"","SkipOptimization":true,"SkipInterpreter":true,"SkipNetworkPrinting":false,"Resume":false,"Sem":1,"InteractionStore":{}}}
+{"time":"2025-05-27T10:50:21.590336724+02:00","level":"INFO","msg":"Finished reading data file","fileName":"mutation","entries":5}
+{"time":"2025-05-27T10:50:21.590354978+02:00","level":"INFO","msg":"Finished reading data file","fileName":"expression","entries":5}
+{"time":"2025-05-27T10:50:21.590402287+02:00","level":"INFO","msg":"Finished reading data file","fileName":"differential expression","entries":3}
+{"time":"2025-05-27T10:50:21.592524177+02:00","level":"INFO","msg":"Running EQTL pathfinding"}
+{"time":"2025-05-27T10:50:21.592534358+02:00","level":"INFO","msg":"frequency increase data per line entries","entries":5}
+{"time":"2025-05-27T10:50:21.592539436+02:00","level":"INFO","msg":"functional score data per line entries","entries":5}
+{"time":"2025-05-27T10:50:21.593503603+02:00","level":"INFO","msg":"network size","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.593512723+02:00","level":"INFO","msg":"network size","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.593516963+02:00","level":"INFO","msg":"converting StringLiner to file","tag":"qtl","filename":"testresult/eqtl/paths_5/eqtl/qtl.network"}
+{"time":"2025-05-27T10:50:21.593599679+02:00","level":"INFO","msg":"sldCutoff","sldCutoff":0}
+{"time":"2025-05-27T10:50:21.593663181+02:00","level":"INFO","msg":"Start processing","samples":3,"parallelism":1}
+{"time":"2025-05-27T10:50:21.593670351+02:00","level":"INFO","msg":"sample network","sample":"sample2","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.593822256+02:00","level":"INFO","msg":"sample network","sample":"sample3","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.593843043+02:00","level":"INFO","msg":"sample network","sample":"sample1","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.59398367+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample2","startGenes":2,"runTime":0,"maxToVisitSize":23}
+{"time":"2025-05-27T10:50:21.593995258+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample3","startGenes":0,"runTime":0,"maxToVisitSize":0}
+{"time":"2025-05-27T10:50:21.594112161+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample1","startGenes":1,"runTime":0,"maxToVisitSize":11}
+{"time":"2025-05-27T10:50:21.594222864+02:00","level":"INFO","msg":"Finished path finding","seconds":0.00169074}
+{"time":"2025-05-27T10:50:21.594254476+02:00","level":"INFO","msg":"Running QTL pathfinding"}
+{"time":"2025-05-27T10:50:21.594259499+02:00","level":"INFO","msg":"frequency increase data per line entries","entries":5}
+{"time":"2025-05-27T10:50:21.59426295+02:00","level":"INFO","msg":"functional score data per line entries","entries":5}
+{"time":"2025-05-27T10:50:21.595327605+02:00","level":"INFO","msg":"network size","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.595340392+02:00","level":"INFO","msg":"network size","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.59534898+02:00","level":"INFO","msg":"converting StringLiner to file","tag":"qtl","filename":"testresult/eqtl/paths_5/mutation/qtl.network"}
+{"time":"2025-05-27T10:50:21.595426209+02:00","level":"INFO","msg":"sldCutoff","sldCutoff":0}
+{"time":"2025-05-27T10:50:21.59552562+02:00","level":"INFO","msg":"Start processing","samples":3,"parallelism":1}
+{"time":"2025-05-27T10:50:21.595690396+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample1","startGenes":1,"runTime":0,"maxToVisitSize":13}
+{"time":"2025-05-27T10:50:21.595981315+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample2","startGenes":2,"runTime":0,"maxToVisitSize":11}
+{"time":"2025-05-27T10:50:21.596205198+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample3","startGenes":2,"runTime":0,"maxToVisitSize":13}
+{"time":"2025-05-27T10:50:21.596355908+02:00","level":"INFO","msg":"Finished path finding","seconds":0.00209773}
+{"time":"2025-05-27T10:50:21.596394371+02:00","level":"INFO","msg":"Running expression path finding"}
+{"time":"2025-05-27T10:50:21.596400521+02:00","level":"INFO","msg":"Processing samples in parallel.","samples":2,"parallelism":1}
+{"time":"2025-05-27T10:50:21.597288037+02:00","level":"INFO","msg":"network size","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.597293849+02:00","level":"INFO","msg":"network size","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.597298133+02:00","level":"INFO","msg":"converting StringLiner to file","tag":"sample1","filename":"testresult/eqtl/paths_5/expression/sample1.network"}
+{"time":"2025-05-27T10:50:21.597431716+02:00","level":"INFO","msg":"sldCutoff","sldCutoff":0}
+{"time":"2025-05-27T10:50:21.598404879+02:00","level":"INFO","msg":"network size","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.598413502+02:00","level":"INFO","msg":"network size","genes":15,"interactions":30,"interaction types":0}
+{"time":"2025-05-27T10:50:21.598418139+02:00","level":"INFO","msg":"converting StringLiner to file","tag":"sample2","filename":"testresult/eqtl/paths_5/expression/sample2.network"}
+{"time":"2025-05-27T10:50:21.598482571+02:00","level":"INFO","msg":"sldCutoff","sldCutoff":0}
+{"time":"2025-05-27T10:50:21.598581384+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample1","startGenes":1,"runTime":1,"maxToVisitSize":57}
+{"time":"2025-05-27T10:50:21.599018844+02:00","level":"INFO","msg":"Finished pathfinding","condition":"sample2","startGenes":2,"runTime":0,"maxToVisitSize":55}
+{"time":"2025-05-27T10:50:21.599108229+02:00","level":"INFO","msg":"Finished path finding","seconds":0.002710146}

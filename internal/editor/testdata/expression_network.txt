@@ -1,0 +1,9 @@
+% pp non-regulatory
+Y001,Y002,pp,undirected,1.000
+Y001,Y003,pp,undirected,0.900
+Y001,Y004,pp,undirected,0.800
+Y001,Y005,pp,undirected,0.700
+Y002,Y003,pp,undirected,0.700
+Y002,Y005,pp,undirected,0.800
+Y005,Y006,pp,undirected,0.900
+Y004,Y006,pp,undirected,1.000

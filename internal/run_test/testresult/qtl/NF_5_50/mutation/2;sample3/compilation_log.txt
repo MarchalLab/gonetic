@@ -1,0 +1,22 @@
+
+c2d compiler version 2.20
+Copyright (c) Automated Reasoning Group, UCLA 2004-2005
+Licensed only for non-commercial, research and educational use
+
+Loaded cnf: 20 vars 29 clauses (0 eclauses)
+0 unit clauses, 23 binary clauses, max clause size: 7
+Generating dtree... done.
+Max Cluster=7, Cutset=2, Context=7, Separator=3, Height=11
+Compiling...done.
+Cache memory: 0.0 MB / Cache count: 9
+NNF memory: 0.0 MB
+Learned clauses: 0
+Compile Time: 0.000s / Pre-Processing: 0.000s / Post-Processing: 0.005s
+
+1.0% of nodes, and 1.0% of edges are dead.
+Saving 102 nodes and 153 edges...done.
+Loading 102 nnf nodes and 153 edges...done.
+Smoothing 102 nodes, 153 edges...121 nodes, 201 edges / 0.000s
+Saving 121 nnf nodes and 201 edges...done.
+
+Total Time: 0.005s

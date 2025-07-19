@@ -1,0 +1,84 @@
+{"time":"2025-05-27T10:50:23.474317469+02:00","level":"INFO","msg":"Using CPUs","maxProcs":1,"numCPU":12}
+{"time":"2025-05-27T10:50:23.474332147+02:00","level":"INFO","msg":"Commmon arguments","":{"SkipAllocsProfiling":false,"SkipGoroutineProfiling":false,"SkipHeapProfiling":false,"Commit":"","OutputFolder":"testresult/expression","NetworkFiles":["testdata/network.csv"],"BannedNetworkFiles":null,"EtcPathAsString":"../../etc","MappingFile":"","NumCPU":1,"LogFormat":"","LogFile":"testresult/expression/output-opt.log","Verbose":false,"TopologyWeightingAddition":"bayes","MinEdgeScore":0.7,"PathTypes":["expression"],"PathLength":5,"BestPathCount":25,"SldCutoff":0.111,"MaxPaths":50,"NumGens":10,"EarlyTermination":true,"TimeLimitHours":0,"WindowCount":20,"MinWindowSize":2,"MaxWindowSize":100,"RequiredProgressPercentage":0.25,"MutChance":0.2,"PopSize":100,"OptimizeNetworkSize":true,"OptimizeSampleCount":true,"FocusFraction":0,"TargetNetworkSize":10,"SampleObjectiveType":"entropy","UseIndex":"","SkipPathFinding":true,"UsePaths":"","SkipCompilation":false,"UseNNFs":"","SkipOptimization":false,"SkipInterpreter":false,"SkipNetworkPrinting":false,"Resume":false,"Sem":1,"InteractionStore":{}}}
+{"time":"2025-05-27T10:50:23.474391264+02:00","level":"INFO","msg":"Finished reading data file","fileName":"expression","entries":5}
+{"time":"2025-05-27T10:50:23.474404811+02:00","level":"INFO","msg":"Finished reading data file","fileName":"differential expression","entries":3}
+{"time":"2025-05-27T10:50:23.474429694+02:00","level":"INFO","msg":"Running optimization"}
+{"time":"2025-05-27T10:50:23.478132244+02:00","level":"INFO","msg":"Clearing and creation of optimization directory finished."}
+{"time":"2025-05-27T10:50:23.478319155+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.478340817+02:00","level":"INFO","msg":"sorted all paths","pathType":"expression","samples":1,"totalDuration":"6µs","peakDuration":"6µs"}
+{"time":"2025-05-27T10:50:23.478346193+02:00","level":"INFO","msg":"Converting paths to CNFs."}
+{"time":"2025-05-27T10:50:23.478895107+02:00","level":"INFO","msg":"Compiling paths to compiled CNFs."}
+{"time":"2025-05-27T10:50:23.479567327+02:00","level":"INFO","msg":"Compiling CNFs to d-DNNFs."}
+{"time":"2025-05-27T10:50:23.500827711+02:00","level":"INFO","msg":"Active goroutines","num":2}
+{"time":"2025-05-27T10:50:23.500838616+02:00","level":"INFO","msg":"d-DNNFs compiled","ms":22,"path type":"expression"}
+{"time":"2025-05-27T10:50:23.50084236+02:00","level":"INFO","msg":"Processing path type","pathType":"expression"}
+{"time":"2025-05-27T10:50:23.500848457+02:00","level":"INFO","msg":"Reading d-DNNFs."}
+{"time":"2025-05-27T10:50:23.50085034+02:00","level":"INFO","msg":"Loading d-DNNFs into memory."}
+{"time":"2025-05-27T10:50:23.501427454+02:00","level":"INFO","msg":"received d-DNNFs","ddnnfs":2}
+{"time":"2025-05-27T10:50:23.501454086+02:00","level":"INFO","msg":"d-DNNFs loaded","ms":0,"path type":"expression"}
+{"time":"2025-05-27T10:50:23.501461054+02:00","level":"INFO","msg":"Starting MO optimization"}
+{"time":"2025-05-27T10:50:23.501464809+02:00","level":"INFO","msg":"start optimisation","cores":1,"population":100,"generations":10,"initialPopulations":10}
+{"time":"2025-05-27T10:50:23.512154876+02:00","level":"INFO","msg":"initial population","id":1,"size":100,"total":10}
+{"time":"2025-05-27T10:50:23.522641234+02:00","level":"INFO","msg":"initial population","id":2,"size":100,"total":20}
+{"time":"2025-05-27T10:50:23.532723278+02:00","level":"INFO","msg":"initial population","id":3,"size":100,"total":30}
+{"time":"2025-05-27T10:50:23.543098552+02:00","level":"INFO","msg":"initial population","id":4,"size":100,"total":40}
+{"time":"2025-05-27T10:50:23.553658118+02:00","level":"INFO","msg":"initial population","id":5,"size":100,"total":50}
+{"time":"2025-05-27T10:50:23.564322098+02:00","level":"INFO","msg":"initial population","id":6,"size":100,"total":60}
+{"time":"2025-05-27T10:50:23.575115017+02:00","level":"INFO","msg":"initial population","id":7,"size":100,"total":70}
+{"time":"2025-05-27T10:50:23.585962706+02:00","level":"INFO","msg":"initial population","id":8,"size":100,"total":80}
+{"time":"2025-05-27T10:50:23.596655077+02:00","level":"INFO","msg":"initial population","id":9,"size":100,"total":90}
+{"time":"2025-05-27T10:50:23.607347789+02:00","level":"INFO","msg":"initial population","id":10,"size":100,"total":100}
+{"time":"2025-05-27T10:50:23.607364246+02:00","level":"INFO","msg":"calculated termination generations","maximal generations":59,"window size":2,"minimal progress":"0.250"}
+{"time":"2025-05-27T10:50:23.612156284+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":78,"attempts":10}
+{"time":"2025-05-27T10:50:23.621144265+02:00","level":"INFO","msg":"computed generation","generation":0,"hyper volume":0,"progress":"0.000%","time":"0.000h","next minSize":1,"next maxSize":10,"window":2}
+{"time":"2025-05-27T10:50:23.626244025+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":33,"attempts":10}
+{"time":"2025-05-27T10:50:23.62627552+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":34,"attempts":10}
+{"time":"2025-05-27T10:50:23.62674376+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":81,"attempts":10}
+{"time":"2025-05-27T10:50:23.626778512+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":83,"attempts":10}
+{"time":"2025-05-27T10:50:23.626806026+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":84,"attempts":10}
+{"time":"2025-05-27T10:50:23.626931041+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":95,"attempts":10}
+{"time":"2025-05-27T10:50:23.635772222+02:00","level":"INFO","msg":"computed generation","generation":1,"hyper volume":0,"progress":"0.000%","time":"0.000h","next minSize":1,"next maxSize":10,"window":2}
+{"time":"2025-05-27T10:50:23.641146628+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":34,"attempts":10}
+{"time":"2025-05-27T10:50:23.641364679+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":55,"attempts":10}
+{"time":"2025-05-27T10:50:23.641431465+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":60,"attempts":10}
+{"time":"2025-05-27T10:50:23.641722904+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":89,"attempts":10}
+{"time":"2025-05-27T10:50:23.650449083+02:00","level":"INFO","msg":"computed generation","generation":2,"hyper volume":0,"progress":"0.000%","time":"0.000h","next minSize":1,"next maxSize":10,"window":2}
+{"time":"2025-05-27T10:50:23.656037432+02:00","level":"WARN","msg":"Duplicate detected, could not find unique child","index":77,"attempts":10}
+{"time":"2025-05-27T10:50:23.665065728+02:00","level":"INFO","msg":"early termination","generation":3,"hyper volume":0,"progress":"0.000%","time":"0.000h","next minSize":1,"next maxSize":10,"window":2}
+{"time":"2025-05-27T10:50:23.665523611+02:00","level":"INFO","msg":"finished optimization","seed reshufles":0,"total generations":4,"total time":"0.058 s","time per generation":"0.015 s"}
+{"time":"2025-05-27T10:50:23.665530009+02:00","level":"INFO","msg":"reading population from file","generation":3,"file":"testresult/expression/MO/population/best_3"}
+{"time":"2025-05-27T10:50:23.665725672+02:00","level":"INFO","msg":"best population","generation":3,"hv":0}
+{"time":"2025-05-27T10:50:23.667847118+02:00","level":"INFO","msg":"Finished MO optimization","seconds":0.166367224}
+{"time":"2025-05-27T10:50:23.667853389+02:00","level":"INFO","msg":"Optimization finished","seconds":0.189780556}
+{"time":"2025-05-27T10:50:23.672321653+02:00","level":"INFO","msg":"Running interpreter"}
+{"time":"2025-05-27T10:50:23.677920121+02:00","level":"INFO","msg":"readNetworks","counts per size":{"1":2,"10":7,"11":6,"12":3,"13":4,"2":1,"3":4,"4":5,"5":6,"6":6,"7":7,"9":10}}
+{"time":"2025-05-27T10:50:23.677972088+02:00","level":"INFO","msg":"Selected network","scoreType":"sample-rank","network node count":15,"network edge count":11,"network scores":[0.09090909090909091,0,1.9987306572662045],"network ranks":[49,1,1],"network top score fractions":"!ERROR:json: unsupported value: NaN"}
+{"time":"2025-05-27T10:50:23.678104947+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.678129003+02:00","level":"INFO","msg":"Condition-specific paths","pathType":"expression","goi":"map[differential expression:map[sample1:map[] sample2:map[2:{} 3:{}]] mutation:map[sample1:map[] sample2:map[]]]"}
+{"time":"2025-05-27T10:50:23.67813546+02:00","level":"INFO","msg":"Initializing and creating results folder"}
+{"time":"2025-05-27T10:50:23.679135443+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.679205611+02:00","level":"INFO","msg":"interpretation finished"}
+{"time":"2025-05-27T10:50:23.679214661+02:00","level":"INFO","msg":"Selected network","scoreType":"sample-norm","network node count":15,"network edge count":11,"network scores":[0.09090909090909091,0,1.9987306572662045],"network ranks":[49,1,1],"network top score fractions":"!ERROR:json: unsupported value: NaN"}
+{"time":"2025-05-27T10:50:23.679330711+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.679351388+02:00","level":"INFO","msg":"Condition-specific paths","pathType":"expression","goi":"map[differential expression:map[sample1:map[] sample2:map[2:{} 3:{}]] mutation:map[sample1:map[] sample2:map[]]]"}
+{"time":"2025-05-27T10:50:23.679361245+02:00","level":"INFO","msg":"Initializing and creating results folder"}
+{"time":"2025-05-27T10:50:23.680326213+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.68042971+02:00","level":"INFO","msg":"interpretation finished"}
+{"time":"2025-05-27T10:50:23.680456302+02:00","level":"INFO","msg":"Selected network","scoreType":"ranksum","network node count":15,"network edge count":11,"network scores":[0.09090909090909091,0,1.9987306572662045],"network ranks":[49,1,1],"network top score fractions":"!ERROR:json: unsupported value: NaN"}
+{"time":"2025-05-27T10:50:23.680584591+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.680606124+02:00","level":"INFO","msg":"Condition-specific paths","pathType":"expression","goi":"map[differential expression:map[sample1:map[] sample2:map[2:{} 3:{}]] mutation:map[sample1:map[] sample2:map[]]]"}
+{"time":"2025-05-27T10:50:23.6806114+02:00","level":"INFO","msg":"Initializing and creating results folder"}
+{"time":"2025-05-27T10:50:23.681563004+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.681629688+02:00","level":"INFO","msg":"interpretation finished"}
+{"time":"2025-05-27T10:50:23.681637953+02:00","level":"INFO","msg":"Selected network","scoreType":"normsum","network node count":15,"network edge count":11,"network scores":[0.09090909090909091,0,1.9987306572662045],"network ranks":[49,1,1],"network top score fractions":"!ERROR:json: unsupported value: NaN"}
+{"time":"2025-05-27T10:50:23.681749432+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.681769543+02:00","level":"INFO","msg":"Condition-specific paths","pathType":"expression","goi":"map[differential expression:map[sample1:map[] sample2:map[2:{} 3:{}]] mutation:map[sample1:map[] sample2:map[]]]"}
+{"time":"2025-05-27T10:50:23.681774964+02:00","level":"INFO","msg":"Initializing and creating results folder"}
+{"time":"2025-05-27T10:50:23.682713515+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.68277946+02:00","level":"INFO","msg":"interpretation finished"}
+{"time":"2025-05-27T10:50:23.68278833+02:00","level":"INFO","msg":"Selected network","scoreType":"expression","network node count":15,"network edge count":11,"network scores":[0.09090909090909091,0,1.9987306572662045],"network ranks":[49,1,1],"network top score fractions":"!ERROR:json: unsupported value: NaN"}
+{"time":"2025-05-27T10:50:23.682898373+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.682918432+02:00","level":"INFO","msg":"Condition-specific paths","pathType":"expression","goi":"map[differential expression:map[sample1:map[] sample2:map[2:{} 3:{}]] mutation:map[sample1:map[] sample2:map[]]]"}
+{"time":"2025-05-27T10:50:23.682923339+02:00","level":"INFO","msg":"Initializing and creating results folder"}
+{"time":"2025-05-27T10:50:23.683945084+02:00","level":"INFO","msg":"filtered path counts","pathType":"expression","pathCount":38,"pathScoreCutoff":0}
+{"time":"2025-05-27T10:50:23.684065822+02:00","level":"INFO","msg":"interpretation finished"}

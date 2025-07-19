@@ -1,0 +1,4 @@
+sample1	sample2	1	TP53->PRKDC	1	[1]	1	[1]
+sample1	sample2	1	ATM->TP53->PRKDC	1	[1 1]	1	[1 1]
+sample1	sample2	1	ATM->PRKDC	1	[1]	1	[1]
+sample2	sample1	1	PRKDC->TP53	1	[1]	1	[1]
