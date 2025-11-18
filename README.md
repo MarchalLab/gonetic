@@ -20,6 +20,7 @@ The following additional requirements are needed to run GoNetic:
    - We are in no way affiliated with the c2d project. See the c2d manual for licensing information of the c2d compiler: "The c2d compiler is licensed only for non–commercial, research and educational use."
    - Get the linux binary `c2d_linux` here: <http://reasoning.cs.ucla.edu/c2d/>, place it in the `etc/` directory, and set execution permissions (e.g. `chmod u+x c2d_linux`) 
    - You might have to install `libc6:i386` or a similar compatibility library to run the c2d binary on your system, since it is a 32-bit binary.
+ - install WFG by running the [etc/build-wfg.sh](./etc/build-wfg.sh) script in the [etc](./etc) folder.
 
 ### usage
 `./gonetic QTL -h`
