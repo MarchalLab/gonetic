@@ -35,7 +35,7 @@ The mutations file is a tab or comma separated file with a headerline that start
  - `condition`: an identifier of a sample or condition
 The following columns are optional:
  - `functional score`: an impact score between 0 and 1, e.g. CADD scores. If this column is not present or should be ignored, add `-e=false` to the command.
- - `freq increase`: a frequency score between 0 and 1, e.g. variant allele frequency. If this column is not present or should be ignored, add `-a=false` to the command.
+ - `freq increase`: a frequency score between 0 and 1, e.g. variant allele frequency. If this column is not present or should be ignored, add `-c=false` to the command.
 Additional columns can be present in the file, but are ignored by GoNetic.
 
 The network file is a tab or comma separated file with a header line for each type of interaction that occurs in the network.
