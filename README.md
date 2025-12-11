@@ -67,6 +67,34 @@ The main output files are in the `output/resulting_networks/sample-norm` folder:
  - `weighted.network`: a tab separated file containing the resulting network. The same type of header lines as in the input network file, each entry now consists of two columns: (1) an unweighted interaction in the same format as the input network file, and (2) the highest edge penalty for which this interaction was selected in the subnetwork selection phase.
  - `conditionSpecificMutationRanking.txt`: a tab separated file containing all genes that are in the resulting network that are also mutated in the input data. The rank of the gene is based on the highest edge penalty for which this gene was selected in the subnetwork selection phase, where rank "1" corresponds with the highest edge penalty that lead to a valid subnetwork.
 
+### visualization
+#### gene sets
+Gene sets can be visualized in the d3js_visualization as follows:
+1. Create a new JavaScript file named `genesets.js`.
+
+2. In this file define exactly one top level variable named `geneSets`.
+   Use the pattern:
+
+```{js}
+const geneSets = {
+    SET_NAME_1: [
+        'GENE_A', 'GENE_B'
+    ],
+    'Custom set 2': [
+        'GENE_C', 'GENE_D'
+    ]
+};
+```
+
+3. Each property of `geneSets` is one gene set.
+   - Key: the gene set name, written as either an identifier or a quoted string.
+   - Value: an array of gene symbols written as strings. These arrays are flat lists without nesting.
+
+4. Add additional gene sets by adding more properties to the object.
+
+5. When finished, place `genesets.js` in the `d3js_visualization` folder next to the existing files so that the visualization code in `highestScoringSubnetwork.html` can access the `geneSets` variable.
+
+
 ### references
 [1] Darwiche A. New advances in compiling CNF to decomposable negation normal form. Proc. of ECAI, 328-332  
 [2] Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A, Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M, Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G, Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase. Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031. PubMed PMID: 31691815.  
