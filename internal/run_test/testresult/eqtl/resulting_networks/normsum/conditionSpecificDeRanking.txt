@@ -1,3 +1,0 @@
-sample1	ARAF 2.053503
-sample2	PIK3CD 14.755023	FRS2 13.863702
-sample3
