@@ -34,7 +34,10 @@ type Common struct {
 	OutputFolder       string
 	NetworkFiles       []string
 	BannedNetworkFiles []string
-	EtcPathAsString    string
+	EtcPath            string
+	DDNNFCompilerPath  string
+	DDNNFCompilerType  string
+	DDNNFCompilerTypes []string
 	MappingFile        string
 	// General settings
 	NumCPU                    int
@@ -272,6 +275,36 @@ func (arguments *Common) Init() error {
 	// if sample objective type is "", set it to "entropy"
 	if arguments.SampleObjectiveType == "" {
 		arguments.SampleObjectiveType = "entropy"
+	}
+
+	// check that a known compiler type is specified, if any
+	arguments.DDNNFCompilerTypes = []string{
+		"d4",
+		"c2d",
+	}
+	if arguments.DDNNFCompilerType != "" {
+		set := make(map[string]bool)
+		for _, v := range arguments.DDNNFCompilerTypes {
+			set[v] = true
+		}
+		if !set[arguments.DDNNFCompilerType] {
+			logger.Error(
+				"Specified --ddnnf-type is invalid",
+				"--ddnnf-type", arguments.DDNNFCompilerType,
+				"DDNNFCompilerTypes", arguments.DDNNFCompilerTypes,
+			)
+			return errors.New("specified --ddnnf-type is invalid")
+		}
+	}
+	// check that both or neither are specified
+	if (arguments.DDNNFCompilerPath == "") != (arguments.DDNNFCompilerType == "") {
+		logger.Error(
+			"--ddnnf-type requires --ddnnf-compiler, and vice versa",
+			"--ddnnf-compiler", arguments.DDNNFCompilerPath,
+			"--ddnnf-type", arguments.DDNNFCompilerType,
+			"DDNNFCompilerTypes", arguments.DDNNFCompilerTypes,
+		)
+		return errors.New("--ddnnf-type requires --ddnnf-compiler, and vice versa")
 	}
 
 	// set the number of logical CPU cores to use

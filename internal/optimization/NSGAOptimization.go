@@ -845,7 +845,7 @@ func (opt *NSGAOptimization) hyperVolumeFromFile() {
 func (opt *NSGAOptimization) calculateHyperVolume(t int, front []subnetwork) float64 {
 	startTime := time.Now()
 	points := wfg.ConvertToFront(front)
-	wfgFile := filepath.Join(opt.EtcPathAsString, fmt.Sprintf("wfg%d", opt.hvCalculatorOpt))
+	wfgFile := filepath.Join(opt.EtcPath, fmt.Sprintf("wfg%d", opt.hvCalculatorOpt))
 	frontFile := filepath.Join(opt.FrontsDirectory(), fmt.Sprintf("%d", t))
 	frontFile = wfg.CreateWfgInput(opt.FileWriter, frontFile, points)
 	err := wfg.RunWfg(opt.FileWriter, wfgFile, frontFile)

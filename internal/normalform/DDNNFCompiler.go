@@ -18,25 +18,64 @@ import (
 // DDNNFCompiler compiles the CNF file into d-DNNF using external software
 type DDNNFCompiler struct {
 	*arguments.Common
-	compiler string
+	compiler     string
+	compilerType string
+}
+
+func fileExists(path string) bool {
+	info, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return !info.IsDir()
 }
 
 func NewDDNNFCompiler(args *arguments.Common, etcFolderLocation string) DDNNFCompiler {
-	// Determine which compiler to use. The compiler is external software and OS dependent.
-	var compiler string
+	// 1. Explicit compiler override
+	if args.DDNNFCompilerPath != "" {
+		if args.DDNNFCompilerType == "" {
+			args.Error("compiler type required when custom compiler path is set")
+			log.Panic("invalid compiler configuration")
+		}
+		return DDNNFCompiler{
+			Common:       args,
+			compiler:     args.DDNNFCompilerPath,
+			compilerType: args.DDNNFCompilerType,
+		}
+	}
+
+	// 2. OS-based auto-detection
+	suffix := ""
 	switch runtime.GOOS {
-	case "windows":
-		compiler = filepath.Join(etcFolderLocation, "c2d_windows.exe")
 	case "linux":
-		compiler = filepath.Join(etcFolderLocation, "c2d_linux")
+		suffix = "_linux"
+	case "windows":
+		suffix = "_windows.exe"
+	case "darwin": // macOS
+		suffix = "_macos"
 	default:
-		args.Error("There is no cnf to d-DDNNF compiler available for the OS %s", "OS", runtime.GOOS)
-		log.Panic("unrecoverable error")
+		args.Error("No d-DNNF compiler available for OS", "OS", runtime.GOOS)
+		log.Panic("unsupported OS")
 	}
-	return DDNNFCompiler{
-		Common:   args,
-		compiler: compiler,
+
+	// 3. Find first existing candidate
+	for _, name := range args.DDNNFCompilerTypes {
+		path := filepath.Join(etcFolderLocation, name+suffix)
+		if fileExists(path) {
+			return DDNNFCompiler{
+				Common:       args,
+				compiler:     path,
+				compilerType: name,
+			}
+		}
 	}
+
+	args.Error("No d-DNNF compiler found in etc folder",
+		"OS", runtime.GOOS,
+		"location", etcFolderLocation,
+	)
+	log.Panic("no compiler found")
+	return DDNNFCompiler{}
 }
 
 // CompileDDNNFs compiles CNFs to d-DNNFs
@@ -97,35 +136,6 @@ func ReadInteractions(location string) map[string]float64 {
 	return interactions
 }
 
-// LoadDDNNFs loads d-DNNFs from disk
-func (compiler DDNNFCompiler) LoadDDNNFs(nfDir string) ([]*NNF, error) {
-	compiler.Info("Reading d-DNNFs.")
-	compiler.Info("Loading d-DNNFs into memory.")
-
-	ddnnfs := make([]*NNF, 0)
-	err := filepath.Walk(nfDir, func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() {
-			return nil
-		}
-		if path == nfDir {
-			return nil
-		}
-		interactionWeights := ReadInteractions(path)
-		ddnnf := ReadDDNF(
-			compiler.Logger,
-			path,
-			"compiled.cnf.nnf",
-			interactionWeights,
-		)
-		ddnnfs = append(ddnnfs, &ddnnf)
-		return nil
-	})
-	if err != nil {
-		return ddnnfs, err
-	}
-	return ddnnfs, nil
-}
-
 // compileDDNNF compiles a CNF to a d-DNNF
 func (compiler DDNNFCompiler) compileDDNNF(location string) {
 	fileName := filepath.Join(location, "compiled.cnf.nnf")
@@ -145,16 +155,23 @@ type kvPair struct {
 	value int
 }
 
+func (compiler DDNNFCompiler) getArgs(location string) []string {
+	compiledCNF := filepath.Join(location, "compiled.cnf")
+	switch compiler.compilerType {
+	case "c2d":
+		return []string{"-cache_size", "2048", "-dt_method", "4", "-smooth_all", "-in", compiledCNF}
+	case "d4":
+		return []string{"-dDNNF", compiledCNF, fmt.Sprintf("-out=%s.nnf", compiledCNF)}
+	}
+	return []string{}
+}
+
 // compile compiles the CNF file to a d-DNNF file
 func (compiler DDNNFCompiler) compile(location string) error {
 	compiler.Debug("Compiling", "location", location)
 
-	// Define the compile process
-	compiledCNF := filepath.Join(location, "compiled.cnf")
-	compilationArgs := []string{"-cache_size", "2048", "-dt_method", "4", "-smooth_all", "-in", compiledCNF}
-
 	// create compilation command
-	cmd := exec.Command(compiler.compiler, compilationArgs...)
+	cmd := exec.Command(compiler.compiler, compiler.getArgs(location)...)
 	// create output file
 	outputFile, err := os.Create(filepath.Join(location, "compilation_log.txt"))
 	if err != nil {

@@ -80,10 +80,9 @@ func (runner OptimizationRunner) loadDDNNFs(pathType string) []*normalform.NNF {
 	}()
 	// read ddnnfs
 	nfDir := filepath.Join(runner.NormalFormDirectory(), pathType)
-	DDNNFCompiler := normalform.NewDDNNFCompiler(runner.Common, runner.EtcPathAsString)
-	dDNNFs, err := DDNNFCompiler.LoadDDNNFs(nfDir)
+	dDNNFs, err := normalform.LoadDDNNFs(runner.Logger, nfDir)
 	if err != nil {
-		runner.Error("error in DDNNFCompiler.LoadDDNNFs", "err", err)
+		runner.Error("error in normalform.LoadDDNNFs", "err", err)
 	}
 	runner.Info("received d-DNNFs", "ddnnfs", len(dDNNFs))
 	runner.computeIntersectionMap(dDNNFs)
@@ -141,7 +140,7 @@ func (runner OptimizationRunner) compilePathsToDDNNF(pathType string, cnfPaths m
 		runner.Error("error in cnf.Compile", "err", err)
 	}
 	// compile d-DNNF's
-	err = normalform.NewDDNNFCompiler(runner.Common, runner.EtcPathAsString).CompileDDNNFs(nfDir)
+	err = normalform.NewDDNNFCompiler(runner.Common, runner.EtcPath).CompileDDNNFs(nfDir)
 	if err != nil {
 		runner.Error("error in DDNNFCompiler.CompileDDNNFs", "err", err)
 	}

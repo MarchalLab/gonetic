@@ -280,7 +280,7 @@ func (runner interpretationRunner) writeResults(
 	// write HTML visualization for resulting subnetwork
 	runner.WriteD3JS(
 		orderedConditions,
-		runner.EtcPathAsString,
+		runner.EtcPath,
 		geneNameMap,
 		resultsDirectory,
 		genesOfInterest,

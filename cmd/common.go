@@ -27,7 +27,7 @@ func init() {
 	rootCmd.PersistentFlags().StringSliceVarP(&commonArguments.NetworkFiles, "network-file", "n", []string{}, "Path to the network file. This parameter can be repeated. See example files for the format.")
 	rootCmd.PersistentFlags().StringVarP(&commonArguments.OutputFolder, "output-folder", "o", "", "Path to desired output folder.")
 	// p - used in QTL
-	rootCmd.PersistentFlags().StringVarP(&commonArguments.EtcPathAsString, "etc-path-location", "q", "etc", "Path to the etc directory. Will assume etc directory is in the current directory when left blank.")
+	rootCmd.PersistentFlags().StringVarP(&commonArguments.EtcPath, "etc-path-location", "q", "etc", "Path to the etc directory. Will assume etc directory is in the current directory when left blank.")
 	rootCmd.PersistentFlags().BoolVarP(&commonArguments.Resume, "resume", "r", false, "Resume the optimization.")
 	rootCmd.PersistentFlags().Float64VarP(&commonArguments.SldCutoff, "search-tree-cutoff", "s", -1, "The minimum probability a path must have to be retained. Paths with a lower probability are regarded as not biologically relevant. By default the sldCutoff will be estimated based on the weighted network.")
 	rootCmd.PersistentFlags().IntVarP(&commonArguments.MaxPaths, "max-paths", "t", 0, "Maximal number of paths used in optimization phase.")
@@ -41,6 +41,8 @@ func init() {
 	// flags without shorthand
 	rootCmd.PersistentFlags().Float64VarP(&commonArguments.MinEdgeScore, "min-edge-score", "", 0.0, "The minimal edge score, lower scoring edges are rejected")
 	rootCmd.PersistentFlags().IntVarP(&commonArguments.BestPathCount, "best-path-count", "", 25, "Number of paths per possible pair. Increasing this might yield better results but is at the expense of longer computational times")
+	rootCmd.PersistentFlags().StringVarP(&commonArguments.DDNNFCompilerPath, "ddnnf-compiler", "", "", "Path to the dDNNF compiler, requires --ddnnf-type. If not provided, an appropriate compiler in the etc folder will be used, if available.")
+	rootCmd.PersistentFlags().StringVarP(&commonArguments.DDNNFCompilerType, "ddnnf-type", "", "", "Specify which dDNNF compiler is being used, only required when --ddnnf-compiler is specified. Valid values are c2d and d4.")
 
 	// Resource flags
 	rootCmd.PersistentFlags().IntVarP(&commonArguments.NumCPU, "numCPU", "", runtime.NumCPU()-2, "Limits the number of logical CPU cores that can be used.")

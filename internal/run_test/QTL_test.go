@@ -17,7 +17,7 @@ func createCommonTestArgs(outputFolder string) *arguments.Common {
 	// Files and directories
 	testArgs.OutputFolder = outputFolder
 	testArgs.NetworkFiles = []string{path.Join("testdata", "network.csv")}
-	testArgs.EtcPathAsString = path.Join("..", "..", "etc")
+	testArgs.EtcPath = path.Join("..", "..", "etc")
 	testArgs.MappingFile = ""
 
 	// General Settings
