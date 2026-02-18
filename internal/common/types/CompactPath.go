@@ -89,9 +89,14 @@ func (p *CompactPath) Length() int {
 }
 
 // TxtString returns a string representation of the path in the format of the output file
-func (p *CompactPath) TxtString(gim *GeneIDMap, from GeneID, condition Condition) string {
+func (p *CompactPath) TxtString(
+	gim *GeneIDMap,
+	from GeneID,
+	condition Condition,
+	translationMap GeneTranslationMap,
+) string {
 	steps := make([]string, 0, 2*p.Length()+1)
-	steps = append(steps, string(gim.GetNameFromID(from)))
+	steps = append(steps, string(gim.GetMappedName(from, translationMap)))
 	interactionTypes := make([]InteractionTypeID, 0, p.Length())
 	for _, interactionID := range p.InteractionOrder {
 		dir := ""
@@ -111,7 +116,7 @@ func (p *CompactPath) TxtString(gim *GeneIDMap, from GeneID, condition Condition
 		}
 		interactionTypes = append(interactionTypes, interactionID.Type())
 		steps = append(steps, dir)
-		steps = append(steps, string(gim.GetNameFromID(from)))
+		steps = append(steps, string(gim.GetMappedName(from, translationMap)))
 	}
 	if condition == p.EndCondition || len(p.EndCondition) == 0 {
 		return fmt.Sprintf("%s\t%s\t%s\t%s\t%+v\t%s\t%+v",

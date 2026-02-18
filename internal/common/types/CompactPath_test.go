@@ -37,7 +37,7 @@ func TestCompactPath_TxtString(t *testing.T) {
 	}
 
 	expected := "condition1\t0.0336\tgene1->gene2->gene3<-gene4\t0.7\t[0.5 0.4 0.3]\t0.8\t[0 0 0]"
-	result := path.TxtString(gim, 1, "condition1")
+	result := path.TxtString(gim, 1, "condition1", nil)
 
 	if result != expected {
 		t.Errorf("expected %s, got %s", expected, result)

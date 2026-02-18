@@ -147,7 +147,7 @@ func writePaths(gim *types.GeneIDMap, fileName string, paths map[types.CNFHeader
 		from := header.Gene
 		condition := header.ConditionName
 		for _, path := range pathMap {
-			lines = append(lines, path.TxtString(gim, from, condition))
+			lines = append(lines, path.TxtString(gim, from, condition, nil))
 		}
 	}
 	fw.WriteLinesToNewFile(fileName, lines)

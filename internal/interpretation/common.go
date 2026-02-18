@@ -29,10 +29,10 @@ func (interpreter Interpreter) WriteWeightedSubnetwork(
 		from := interpreter.GetMappedName(interaction.From(), geneMapping)
 		to := interpreter.GetMappedName(interaction.To(), geneMapping)
 		interactionLines = append(interactionLines, fmt.Sprintf(
-			"%s\t%s\t%d\t%f",
+			"%s\t%s\t%s\t%f",
 			from,
 			to,
-			interaction.Type(),
+			arguments.GlobalInteractionStore.InteractionType(interaction),
 			score,
 		))
 	}

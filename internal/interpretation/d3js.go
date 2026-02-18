@@ -78,7 +78,7 @@ func (interpreter Interpreter) WriteD3JS(
 	}
 
 	encoder := encodeNetworkPaths(interpreter.Common, subnetwork)
-	pathDataLines := interpreter.getPathDataLines(encoder)
+	pathDataLines := interpreter.getPathDataLines(encoder, nodeNameConversionMap)
 	// write the JS data file
 	err = interpreter.WriteLinesToNewFile(
 		filepath.Join(d3jsDirectory, "paths.js"),
@@ -96,6 +96,7 @@ func (interpreter Interpreter) WriteD3JS(
 // getPathDataLines gathers the path data
 func (interpreter Interpreter) getPathDataLines(
 	encoder *pathDataEncoder,
+	nodeNameConversionMap types.GeneTranslationMap,
 ) []string {
 	lines := make([]string, 0)
 	lines = append(lines, "paths = {")
@@ -103,7 +104,7 @@ func (interpreter Interpreter) getPathDataLines(
 		lines = append(lines, fmt.Sprintf("%s: [", pathType))
 		for cnfHeader, paths := range encoder.Paths[pathType] {
 			for _, path := range paths {
-				split := strings.Split(path.TxtString(interpreter.GeneIDMap, cnfHeader.Gene, cnfHeader.ConditionName), "\t")
+				split := strings.Split(path.TxtString(interpreter.GeneIDMap, cnfHeader.Gene, cnfHeader.ConditionName, nodeNameConversionMap), "\t")
 				if len(split) < 8 {
 					// duplicate first sample
 					split = append([]string{split[0]}, split...)
