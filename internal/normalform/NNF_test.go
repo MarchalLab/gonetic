@@ -110,32 +110,39 @@ var testCases = []testCase{
 }
 
 func TestEvaluateIntersection(t *testing.T) {
-	reader := DDNNFReader{Logger: slog.Default()}
-	for _, tc := range testCases {
-		t.Run(tc.name, func(t *testing.T) {
-			interactions := types.NewInteractionIDSet()
-			interactionIndex := make(map[types.InteractionID]int)
-			for idx, i := range tc.interactions {
-				interactionID := parseInteraction(i)
-				interactions.Set(interactionID)
-				interactionIndex[interactionID] = idx
-			}
-			// run readNNF
-			nnf := reader.ReadNNF(
-				filepath.Join("testdata", tc.name),
-				fmt.Sprintf("%s.cnf.nnf", tc.name),
-				testIW,
-			)
+	reader := map[string]DDNNFReader{
+		"c2d": C2DReader{Logger: slog.Default()},
+		"d4":  D4Reader{Logger: slog.Default()},
+	}
+	for _, compiler := range []string{"c2d", "d4"} {
+		for _, tc := range testCases {
+			if !t.Run(tc.name, func(t *testing.T) {
+				interactions := types.NewInteractionIDSet()
+				interactionIndex := make(map[types.InteractionID]int)
+				for idx, i := range tc.interactions {
+					interactionID := parseInteraction(i)
+					interactions.Set(interactionID)
+					interactionIndex[interactionID] = idx
+				}
+				// run readNNF
+				nnf := reader[compiler].ReadNNF(
+					filepath.Join("testdata", tc.name),
+					fmt.Sprintf("%s.%s.nnf", tc.name, compiler),
+					testIW,
+				)
 
-			// compute derivative
-			nnf.InteractionIndex = interactionIndex
-			derivative := nnf.EvaluateIntersection(interactions)
+				// compute derivative
+				nnf.InteractionIndex = interactionIndex
+				derivative := nnf.EvaluateIntersection(interactions)
 
-			// compare actual to golden
-			tolerance := compare.Tolerance(.00001)
-			if !tolerance.FloatEqualWithinTolerance(tc.expected, derivative) {
-				t.Errorf("computed %f expected %f: %+v", derivative, tc.expected, nnf)
+				// compare actual to golden
+				tolerance := compare.Tolerance(.00001)
+				if !tolerance.FloatEqualWithinTolerance(tc.expected, derivative) {
+					t.Errorf("%s computed %f expected %f: %+v", compiler, derivative, tc.expected, nnf)
+				}
+			}) {
+				break
 			}
-		})
+		}
 	}
 }
