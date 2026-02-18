@@ -110,10 +110,6 @@ var testCases = []testCase{
 }
 
 func TestEvaluateIntersection(t *testing.T) {
-	reader := map[string]DDNNFReader{
-		"c2d": C2DReader{Logger: slog.Default()},
-		"d4":  D4Reader{Logger: slog.Default()},
-	}
 	for _, compiler := range []string{"c2d", "d4"} {
 		for _, tc := range testCases {
 			if !t.Run(tc.name, func(t *testing.T) {
@@ -125,7 +121,7 @@ func TestEvaluateIntersection(t *testing.T) {
 					interactionIndex[interactionID] = idx
 				}
 				// run readNNF
-				nnf := reader[compiler].ReadNNF(
+				nnf := ReadDDNF(slog.Default(),
 					filepath.Join("testdata", tc.name),
 					fmt.Sprintf("%s.%s.nnf", tc.name, compiler),
 					testIW,

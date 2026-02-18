@@ -15,6 +15,8 @@ const (
 	positive
 	erroneous
 	core
+	constantTrue
+	constantFalse
 )
 
 type nnfNode struct {
@@ -36,7 +38,7 @@ func (node nnfNode) computeProbability(selectedNodeNames types.InteractionIDSet)
 	switch node.leafType {
 	case noLeaf:
 		return 0.0
-	case leaf | value:
+	case leaf, value:
 		return 0.0
 	case aux:
 		// always 1.0, also for negated // TODO why
@@ -59,6 +61,10 @@ func (node nnfNode) computeProbability(selectedNodeNames types.InteractionIDSet)
 			return node.probability
 		}
 		return 0
+	case constantTrue:
+		return 1.0
+	case constantFalse:
+		return 0.0
 	}
 	return 0.0
 }
@@ -105,19 +111,31 @@ func newNNFNode(id int, name string, children []int) nnfNode {
 }
 
 func newORNNFNode(id int, children []int) nnfNode {
-	node := newNNFNode(id, "", children)
+	node := newNNFNode(id, "OR", children)
 	node.or = true
 	return node
 }
 
 func newANDNNFNode(id int, children []int) nnfNode {
-	node := newNNFNode(id, "", children)
+	node := newNNFNode(id, "AND", children)
 	return node
 }
 
 func newLeafNNFNode(id int, name string) nnfNode {
 	node := newNNFNode(id, name, make([]int, 0))
 	node.leafType = leaf
+	return node
+}
+
+func newTrueLeafNNFNode(id int) nnfNode {
+	node := newNNFNode(id, "TRUE", nil)
+	node.leafType = constantTrue
+	return node
+}
+
+func newFalseLeafNNFNode(id int) nnfNode {
+	node := newNNFNode(id, "FALSE", nil)
+	node.leafType = constantFalse
 	return node
 }
 

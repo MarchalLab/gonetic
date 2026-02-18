@@ -7,9 +7,12 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/MarchalLab/gonetic/internal/common/arguments"
+	"github.com/MarchalLab/gonetic/internal/common/fileio"
 )
 
 // DDNNFCompiler compiles the CNF file into d-DNNF using external software
@@ -77,11 +80,26 @@ func (compiler DDNNFCompiler) CompileDDNNFs(nfDir string) error {
 	return nil
 }
 
+func ReadInteractions(location string) map[string]float64 {
+	filename := filepath.Join(location, "interactions")
+	lines := fileio.ReadListFromFile(filename, false)
+	interactions := make(map[string]float64)
+
+	for _, line := range lines {
+		split := strings.Split(line, ";")
+		if len(split) != 4 {
+			panic("Parsing error in interaction: " + line)
+		}
+		probability, _ := strconv.ParseFloat(split[3], 64)
+		interactions[split[0]+";"+split[1]+";"+split[2]] = probability
+	}
+
+	return interactions
+}
+
 // LoadDDNNFs loads d-DNNFs from disk
 func (compiler DDNNFCompiler) LoadDDNNFs(nfDir string) ([]*NNF, error) {
 	compiler.Info("Reading d-DNNFs.")
-
-	ddnnfReader := NewDDNNFReader(compiler.Logger)
 	compiler.Info("Loading d-DNNFs into memory.")
 
 	ddnnfs := make([]*NNF, 0)
@@ -93,7 +111,8 @@ func (compiler DDNNFCompiler) LoadDDNNFs(nfDir string) ([]*NNF, error) {
 			return nil
 		}
 		interactionWeights := ReadInteractions(path)
-		ddnnf := ddnnfReader.ReadNNF(
+		ddnnf := ReadDDNF(
+			compiler.Logger,
 			path,
 			"compiled.cnf.nnf",
 			interactionWeights,

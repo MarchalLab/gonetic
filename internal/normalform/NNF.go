@@ -22,13 +22,16 @@ type NNF struct {
 	*slog.Logger
 	nodes            []nnfNode
 	pathNode         nnfNode
+	rootNode         nnfNode
+	nodeOrder        []int
 	startGene        string // TODO
 	condition        types.Condition
 	values           types.InteractionIDSet
 	parentMap        [][]int
 	InteractionIndex map[types.InteractionID]int
 	fromScore        float64
-	toScore          float64 // TODO this needs to be 1 float per path
+	toScore          float64   // TODO this needs to be 1 float per path
+	scores           []float64 // only used for debugging
 }
 
 func (nnf *NNF) Nodes() []nnfNode {
@@ -62,6 +65,7 @@ func parseInteraction(line string) types.InteractionID {
 }
 
 func newNNF(logger *slog.Logger, nodes []nnfNode) NNF {
+	// determine path node
 	var pathNode nnfNode
 	for _, node := range nodes {
 		if !types.IsPathStringFormat(node.name) {
@@ -73,6 +77,7 @@ func newNNF(logger *slog.Logger, nodes []nnfNode) NNF {
 		pathNode = node
 		break
 	}
+	// create values
 	values := types.NewInteractionIDSet()
 	for _, node := range nodes {
 		if !node.hasUnderlyingValue() {
@@ -82,6 +87,7 @@ func newNNF(logger *slog.Logger, nodes []nnfNode) NNF {
 		interaction := parseInteraction(node.name)
 		values.Set(interaction)
 	}
+	// create parent map
 	parentMap := make([][]int, len(nodes))
 	for _, node := range nodes {
 		parentMap[node.id] = make([]int, 0)
@@ -92,10 +98,15 @@ func newNNF(logger *slog.Logger, nodes []nnfNode) NNF {
 		}
 	}
 	split := strings.Split(pathNode.name, ";")
+	rootIdx := rootIndex(pathNode, parentMap, nodes)
+	order := nodeOrder(nodes, rootIdx)
+
 	return NNF{
 		Logger:    logger,
 		nodes:     nodes,
 		pathNode:  pathNode,
+		rootNode:  nodes[rootIdx],
+		nodeOrder: order,
 		startGene: split[0],
 		condition: types.Condition(split[1]),
 		values:    values,
@@ -105,9 +116,70 @@ func newNNF(logger *slog.Logger, nodes []nnfNode) NNF {
 	}
 }
 
+func rootIndex(pathNode nnfNode, parentMap [][]int, nodes []nnfNode) int {
+
+	// compute reachable ancestors of pathNode
+	reachable := make(map[int]bool)
+	stack := []int{pathNode.id}
+
+	for len(stack) > 0 {
+		current := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+
+		if reachable[current] {
+			continue
+		}
+		reachable[current] = true
+
+		for _, parent := range parentMap[current] {
+			stack = append(stack, parent)
+		}
+	}
+
+	// find semantic root
+	rootIndex := -1
+	for i := range nodes {
+		if len(parentMap[i]) == 0 &&
+			reachable[i] &&
+			len(nodes[i].children) > 0 {
+
+			rootIndex = i
+			break
+		}
+	}
+
+	if rootIndex == -1 {
+		panic("no valid root node found")
+	}
+	return rootIndex
+}
+
+func nodeOrder(nodes []nnfNode, rootIndex int) []int {
+	visited := make(map[int]bool)
+	var order []int
+
+	var dfs func(int)
+	dfs = func(id int) {
+		if visited[id] {
+			return
+		}
+		visited[id] = true
+
+		for _, child := range nodes[id].children {
+			dfs(child)
+		}
+
+		order = append(order, id)
+	}
+
+	dfs(rootIndex)
+	return order
+}
+
 func (nnf *NNF) calculateValues(selectedNodeNames types.InteractionIDSet) []float64 {
 	valueMap := make([]float64, len(nnf.nodes))
-	for i, node := range nnf.nodes {
+	for _, i := range nnf.nodeOrder {
+		node := nnf.nodes[i]
 		// leaf node: get probability of node
 		if node.IsLeafNode() {
 			valueMap[i] = node.computeProbability(selectedNodeNames)
@@ -143,7 +215,8 @@ func (nnf *NNF) EvaluateIntersection(intersection types.InteractionIDSet) float6
 	}
 	// compute score
 	values := nnf.calculateValues(intersection)
-	score := values[len(values)-1]
+	nnf.scores = values
+	score := values[nnf.rootNode.id] // equivalent to last entry in the array, due to calculation order
 	if score > 1 && score < 1.00001 {
 		// sometimes score is slightly off due to rounding errors in the computation
 		// if the value is slightly larger than 1, then we assume this is a rounding error, so set it to 1
