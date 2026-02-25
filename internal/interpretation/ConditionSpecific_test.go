@@ -84,7 +84,7 @@ func TestPathInSubnetwork(t *testing.T) {
 }
 
 func pathsForTestFile(_ string) string {
-	return "testdata/paths.txt"
+	return filepath.Join("testdata", "paths.txt")
 }
 
 func weightsForTestFile(_, _ string) string {
@@ -113,12 +113,12 @@ func readTestData() (
 	// create logger
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 	// read the gene id map
-	gim := readers.ReadGeneMap("testdata/gene-ids")
+	gim := readers.ReadGeneMap(filepath.Join("testdata", "gene-ids"))
 	// read the weighted network
 	headers := []string{"from", "to", "rank"}
 	weightedInteractions := readers.ReadSeparatedFile(
 		logger,
-		"testdata/weighted.network",
+		filepath.Join("testdata", "weighted.network"),
 		"final subnetwork",
 		headers,
 		headers,
@@ -134,11 +134,11 @@ func readTestData() (
 	genesOfInterest := NewGenesOfInterestMap(gim, []readers.FileData{
 		readers.ReadInputDataHeadersMutationFile(
 			logger,
-			"testdata/mutations",
+			filepath.Join("testdata", "mutations"),
 		),
 		readers.ReadExpressionFile(
 			logger,
-			"testdata/expression",
+			filepath.Join("testdata", "expression"),
 			"none",
 		),
 	})
@@ -222,7 +222,7 @@ func TestEdgesInCondition(t *testing.T) {
 	sort.Strings(edgeLines)
 	fw.WriteLinesToNewFile(outputFile, edgeLines)
 	// check that the new file is the same as the expected file
-	expectedFile := "testdata/edgesInCondition.txt"
+	expectedFile := filepath.Join("testdata", "edgesInCondition.txt")
 	if !fileio.CompareFiles(outputFile, expectedFile) {
 		t.Errorf("Files %s and %s are not the same", outputFile, expectedFile)
 	}
@@ -265,12 +265,12 @@ func TestConditionSpecificRanking(t *testing.T) {
 
 	// check that the new file is the same as the expected file
 	outputFile := filepath.Join(dir, "conditionSpecificExpressionRanking.txt")
-	expectedFile := "testdata/conditionSpecificExpressionRanking.txt"
+	expectedFile := filepath.Join("testdata", "conditionSpecificExpressionRanking.txt")
 	if !fileio.CompareFiles(outputFile, expectedFile) {
 		t.Errorf("Files %s and %s are not the same", outputFile, expectedFile)
 	}
 	outputFile = filepath.Join(dir, "conditionSpecificMutationRanking.txt")
-	expectedFile = "testdata/conditionSpecificMutationRanking.txt"
+	expectedFile = filepath.Join("testdata", "conditionSpecificMutationRanking.txt")
 	if !fileio.CompareFiles(outputFile, expectedFile) {
 		t.Errorf("Files %s and %s are not the same", outputFile, expectedFile)
 	}

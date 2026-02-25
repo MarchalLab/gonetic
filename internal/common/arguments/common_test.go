@@ -10,16 +10,20 @@ import (
 	"testing"
 )
 
+func testOutputFolder() string {
+	return filepath.Join("test", "output")
+}
+
 // TestCommon_PathsDirectory tests the PathsDirectory method
 func TestCommon_PathsDirectory(t *testing.T) {
 	// Create an instance of Common with a test output folder
 	common := Common{
-		OutputFolder: "/test/output",
+		OutputFolder: testOutputFolder(),
 	}
 
 	// Expected value
 	expected := filepath.Join(
-		"/test/output",
+		testOutputFolder(),
 		fmt.Sprintf("%s_%d", pathsDirectoryName, common.PathLength),
 	)
 
@@ -34,9 +38,9 @@ func TestCommon_PathsDirectory(t *testing.T) {
 
 // TestCommon_PathsFile tests the PathsFile method
 func TestCommon_PathsFile(t *testing.T) {
-	common := Common{OutputFolder: "/test/output"}
+	common := Common{OutputFolder: testOutputFolder()}
 	expected := filepath.Join(
-		"/test/output",
+		testOutputFolder(),
 		fmt.Sprintf("%s_%d", pathsDirectoryName, common.PathLength),
 		pathsFileName,
 	)
@@ -48,10 +52,10 @@ func TestCommon_PathsFile(t *testing.T) {
 
 // TestCommon_WeightsFile tests the WeightsFile method
 func TestCommon_WeightsFile(t *testing.T) {
-	common := Common{OutputFolder: "/test/output"}
+	common := Common{OutputFolder: testOutputFolder()}
 	prefix := "test_"
 	expected := filepath.Join(
-		"/test/output",
+		testOutputFolder(),
 		fmt.Sprintf("%s_%d", pathsDirectoryName, common.PathLength),
 		prefix+weightsFileName,
 	)
@@ -63,8 +67,8 @@ func TestCommon_WeightsFile(t *testing.T) {
 
 // TestCommon_OptimizationDirectory tests the OptimizationDirectory method
 func TestCommon_OptimizationDirectory(t *testing.T) {
-	common := Common{OutputFolder: "/test/output"}
-	expected := filepath.Join("/test/output", optimizationDirectoryName+"_0")
+	common := Common{OutputFolder: testOutputFolder()}
+	expected := filepath.Join(testOutputFolder(), optimizationDirectoryName+"_0")
 	actual := common.OptimizationDirectory()
 	if expected != actual {
 		t.Errorf("Expected %s, got %s", expected, actual)
@@ -73,9 +77,9 @@ func TestCommon_OptimizationDirectory(t *testing.T) {
 
 // TestCommon_ResultsDirectory tests the ResultsDirectory method
 func TestCommon_ResultsDirectory(t *testing.T) {
-	common := Common{OutputFolder: "/test/output"}
+	common := Common{OutputFolder: testOutputFolder()}
 	pathType := "test"
-	expected := filepath.Join("/test/output", resultsDirectoryName, pathType)
+	expected := filepath.Join(testOutputFolder(), resultsDirectoryName, pathType)
 	actual := common.ResultsDirectory(pathType)
 	if expected != actual {
 		t.Errorf("Expected %s, got %s", expected, actual)
@@ -84,8 +88,8 @@ func TestCommon_ResultsDirectory(t *testing.T) {
 
 // TestCommon_FillDirectory tests the FillDirectory method
 func TestCommon_FillDirectory(t *testing.T) {
-	common := Common{OutputFolder: "/test/output"}
-	expected := filepath.Join("/test/output", filledDirectoryName)
+	common := Common{OutputFolder: testOutputFolder()}
+	expected := filepath.Join(testOutputFolder(), filledDirectoryName)
 	actual := common.FillDirectory()
 	if expected != actual {
 		t.Errorf("Expected %s, got %s", expected, actual)
@@ -94,7 +98,7 @@ func TestCommon_FillDirectory(t *testing.T) {
 
 // TestCommon_WeightedNetworkFile tests the WeightedNetworkFile method
 func TestCommon_WeightedNetworkFile(t *testing.T) {
-	directory := "/test/specific/directory"
+	directory := testOutputFolder()
 	common := Common{}
 	expected := filepath.Join(directory, weightedNetworkFileName)
 	actual := common.WeightedNetworkFile(directory)
@@ -119,8 +123,8 @@ func TestCommon_WorkingDirectory(t *testing.T) {
 
 // TestCommon_AutoLogFile tests the AutoLogFile method
 func TestCommon_AutoLogFile(t *testing.T) {
-	common := Common{OutputFolder: "/test/output"}
-	expected := filepath.Join("/test/output", "output.log")
+	common := Common{OutputFolder: testOutputFolder()}
+	expected := filepath.Join(testOutputFolder(), "output.log")
 	actual := common.AutoLogFile()
 	if expected != actual {
 		t.Errorf("Expected %s, got %s", expected, actual)
@@ -139,7 +143,7 @@ func TestCommon_Init(t *testing.T) {
 		{"DefaultSettings", 0, "", "", 1},
 		{"SetNumCPU", 2, "", "text", 2},
 		{"AutoLogFile", runtime.NumCPU(), "auto", "text", runtime.NumCPU()},
-		{"CustomLogFile", 0, "pathto/logfile", "json", 1},
+		{"CustomLogFile", 0, filepath.Join("pathto", "logfile"), "json", 1},
 		// Add more test cases as needed
 	}
 	for _, testCase := range testCases {
@@ -192,13 +196,13 @@ func TestCommon_Init_UsePrecomputed(t *testing.T) {
 		useNNFs     string
 		expectError bool
 	}{
-		{"ValidCombination1", "path/to/index", "path/to/paths", "path/to/nnfs", false},
-		{"ValidCombination2", "path/to/index", "path/to/paths", "", false},
-		{"ValidCombination3", "path/to/index", "", "", false},
+		{"ValidCombination1", filepath.Join("path", "to", "index"), filepath.Join("path", "to", "paths"), filepath.Join("path", "to", "nnfs"), false},
+		{"ValidCombination2", filepath.Join("path", "to", "index"), filepath.Join("path", "to", "paths"), "", false},
+		{"ValidCombination3", filepath.Join("path", "to", "index"), "", "", false},
 		{"ValidCombination4", "", "", "", false},
-		{"InvalidCombination1", "", "path/to/paths", "path/to/nnfs", true},
-		{"InvalidCombination2", "", "", "path/to/nnfs", true},
-		{"InvalidCombination3", "path/to/index", "", "path/to/nnfs", true},
+		{"InvalidCombination1", "", filepath.Join("path", "to", "paths"), filepath.Join("path", "to", "nnfs"), true},
+		{"InvalidCombination2", "", "", filepath.Join("path", "to", "nnfs"), true},
+		{"InvalidCombination3", filepath.Join("path", "to", "index"), "", filepath.Join("path", "to", "nnfs"), true},
 	}
 
 	for _, testCase := range testCases {

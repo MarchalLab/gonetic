@@ -2,6 +2,7 @@ package pathfinding
 
 import (
 	"log/slog"
+	"path/filepath"
 	"testing"
 
 	"github.com/MarchalLab/gonetic/internal/common/arguments"
@@ -15,7 +16,7 @@ func commonArgs(output string) *arguments.Common {
 		Logger: slog.Default(),
 	}
 	commonArgs.OutputFolder = output
-	commonArgs.NetworkFiles = []string{"testdata/network"}
+	commonArgs.NetworkFiles = []string{filepath.Join("testdata", "network")}
 	commonArgs.TopologyWeightingAddition = "none"
 	commonArgs.BestPathCount = 25
 	commonArgs.PathLength = 5
@@ -26,7 +27,7 @@ func readTestData() (*arguments.EQTL, readers.FileData, readers.FileData) {
 	// create the args
 	args := &arguments.EQTL{
 		Expression: &arguments.Expression{
-			Common:                    commonArgs("testresult/eqtl"),
+			Common:                    commonArgs(filepath.Join("testresult", "eqtl")),
 			ExpressionWeightingMethod: "none",
 		},
 		QTLSpecific: &arguments.QTLSpecific{},
@@ -37,11 +38,11 @@ func readTestData() (*arguments.EQTL, readers.FileData, readers.FileData) {
 	// the data files
 	mutationData := readers.ReadInputDataHeadersMutationFile(
 		args.Logger,
-		"testdata/mutations",
+		filepath.Join("testdata", "mutations"),
 	)
 	expressionData := readers.ReadExpressionFile(
 		args.Logger,
-		"testdata/expression",
+		filepath.Join("testdata", "expression"),
 		"none",
 	)
 	// return the data
@@ -55,7 +56,7 @@ func TestEQTL(t *testing.T) {
 
 func TestExpression(t *testing.T) {
 	args := &arguments.Expression{
-		Common:                    commonArgs("testresult/expression"),
+		Common:                    commonArgs(filepath.Join("testresult", "expression")),
 		ExpressionWeightingMethod: "none",
 	}
 	args.Init()
@@ -64,7 +65,7 @@ func TestExpression(t *testing.T) {
 	// the data files
 	expressionData := readers.ReadExpressionFile(
 		args.Logger,
-		"testdata/expression",
+		filepath.Join("testdata", "expression"),
 		"none",
 	)
 	expression("expression", expressionData, expressionData, args)
@@ -72,7 +73,7 @@ func TestExpression(t *testing.T) {
 
 func TestQTL(t *testing.T) {
 	args := &arguments.QTL{
-		Common:      commonArgs("testresult/qtl"),
+		Common:      commonArgs(filepath.Join("testresult", "qtl")),
 		QTLSpecific: &arguments.QTLSpecific{},
 	}
 	args.Init()
@@ -81,7 +82,7 @@ func TestQTL(t *testing.T) {
 	// the data files
 	mutationData := readers.ReadInputDataHeadersMutationFile(
 		args.Logger,
-		"testdata/mutations",
+		filepath.Join("testdata", "mutations"),
 	)
 	qtl("qtl", mutationData, args.QTLSpecific, args.Common)
 }

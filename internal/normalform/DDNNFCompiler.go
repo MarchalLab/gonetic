@@ -44,23 +44,9 @@ func NewDDNNFCompiler(args *arguments.Common, etcFolderLocation string) DDNNFCom
 		}
 	}
 
-	// 2. OS-based auto-detection
-	suffix := ""
-	switch runtime.GOOS {
-	case "linux":
-		suffix = "_linux"
-	case "windows":
-		suffix = "_windows.exe"
-	case "darwin": // macOS
-		suffix = "_macos"
-	default:
-		args.Error("No d-DNNF compiler available for OS", "OS", runtime.GOOS)
-		log.Panic("unsupported OS")
-	}
-
-	// 3. Find first existing candidate
+	// 2. Find first existing candidate
 	for _, name := range args.DDNNFCompilerTypes {
-		path := filepath.Join(etcFolderLocation, name+suffix)
+		path := filepath.Join(etcFolderLocation, fmt.Sprintf("%s%s", name, args.ExeSuffix()))
 		if fileExists(path) {
 			return DDNNFCompiler{
 				Common:       args,
@@ -73,6 +59,7 @@ func NewDDNNFCompiler(args *arguments.Common, etcFolderLocation string) DDNNFCom
 	args.Error("No d-DNNF compiler found in etc folder",
 		"OS", runtime.GOOS,
 		"location", etcFolderLocation,
+		"known compilers", args.DDNNFCompilerTypes,
 	)
 	log.Panic("no compiler found")
 	return DDNNFCompiler{}

@@ -3,6 +3,7 @@ package graph_test
 import (
 	"log/slog"
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/MarchalLab/gonetic/internal/common/arguments"
@@ -17,7 +18,7 @@ func TestUpstreamExpander_Expand(t *testing.T) {
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 	gim := types.NewGeneIDMap()
 	nwr := readers.NewInitialNetworkReader(logger, gim)
-	network := nwr.NewNetworkFromFile("testdata/expand-network.csv", false, true)
+	network := nwr.NewNetworkFromFile(filepath.Join("testdata", "expand-network.csv"), false, true)
 
 	expander := graph.NewUpstreamExpander(network)
 

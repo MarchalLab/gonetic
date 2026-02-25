@@ -221,6 +221,13 @@ func (arguments *Common) LogActiveGoRoutines() {
 	arguments.Info("Active goroutines", "num", runtime.NumGoroutine())
 }
 
+func (arguments *Common) ExeSuffix() string {
+	if runtime.GOOS == "windows" {
+		return ".exe"
+	}
+	return ""
+}
+
 func (arguments *Common) Init() error {
 	// set the log file
 	var logWriter io.Writer

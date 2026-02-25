@@ -1,7 +1,6 @@
 package run_test
 
 import (
-	"path"
 	"path/filepath"
 	"testing"
 
@@ -10,7 +9,7 @@ import (
 )
 
 func TestEQTL(t *testing.T) {
-	outputFolder := path.Join("testresult", "eqtl")
+	outputFolder := filepath.Join("testresult", "eqtl")
 	commonArgs := createCommonTestArgs(outputFolder)
 	commonArgs.OutputFolder = outputFolder
 	commonArgs.SkipOptimization = true
@@ -19,8 +18,8 @@ func TestEQTL(t *testing.T) {
 		Common: commonArgs,
 
 		DownUpstream:               true,
-		ExpressionFile:             path.Join("testdata", "input-expression.csv"),
-		DifferentialExpressionList: path.Join("testdata", "input-differential-expression.csv"),
+		ExpressionFile:             filepath.Join("testdata", "input-expression.csv"),
+		DifferentialExpressionList: filepath.Join("testdata", "input-differential-expression.csv"),
 
 		ExpressionWeightingMethod:   "none",
 		ExpressionWeightingAddition: "none",
@@ -30,7 +29,7 @@ func TestEQTL(t *testing.T) {
 		FreqIncrease:     true,
 		Correction:       true,
 		FuncScore:        true,
-		MutationDataFile: path.Join("testdata", "input-qtl.csv"),
+		MutationDataFile: filepath.Join("testdata", "input-qtl.csv"),
 	}
 	args := arguments.EQTL{
 		Expression:     &expressionArgs,

@@ -17,7 +17,7 @@ func createCommonTestArgs(outputFolder string) *arguments.Common {
 	// Files and directories
 	testArgs.OutputFolder = outputFolder
 	testArgs.NetworkFiles = []string{path.Join("testdata", "network.csv")}
-	testArgs.EtcPath = path.Join("..", "..", "etc")
+	testArgs.EtcPath = filepath.Join("..", "..", "etc")
 	testArgs.MappingFile = ""
 
 	// General Settings
@@ -60,7 +60,7 @@ func createCommonTestArgs(outputFolder string) *arguments.Common {
 }
 
 func TestQTL(t *testing.T) {
-	outputFolder := path.Join("testresult", "qtl")
+	outputFolder := filepath.Join("testresult", "qtl")
 	commonArgs := createCommonTestArgs(outputFolder)
 	commonArgs.OutputFolder = outputFolder
 	qtlArgs := arguments.QTLSpecific{
@@ -68,7 +68,7 @@ func TestQTL(t *testing.T) {
 		Correction:       true,
 		FuncScore:        true,
 		MutRateParam:     0,
-		MutationDataFile: path.Join("testdata", "input-qtl.csv"),
+		MutationDataFile: filepath.Join("testdata", "input-qtl.csv"),
 		FreqCutoff:       0,
 		WithinCondition:  false,
 	}

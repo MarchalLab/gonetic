@@ -1,7 +1,6 @@
 package run_test
 
 import (
-	"path"
 	"path/filepath"
 	"testing"
 
@@ -10,15 +9,15 @@ import (
 )
 
 func TestExpression(t *testing.T) {
-	outputFolder := path.Join("testresult", "expression")
+	outputFolder := filepath.Join("testresult", "expression")
 	commonArgs := createCommonTestArgs(outputFolder)
 	commonArgs.OutputFolder = outputFolder
 	args := arguments.Expression{
 		Common: commonArgs,
 
 		DownUpstream:               true,
-		ExpressionFile:             path.Join("testdata", "input-expression.csv"),
-		DifferentialExpressionList: path.Join("testdata", "input-differential-expression.csv"),
+		ExpressionFile:             filepath.Join("testdata", "input-expression.csv"),
+		DifferentialExpressionList: filepath.Join("testdata", "input-differential-expression.csv"),
 
 		ExpressionWeightingMethod:   "none",
 		ExpressionWeightingAddition: "none",

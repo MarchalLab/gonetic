@@ -103,10 +103,10 @@ func TestParseEdgeScores(t *testing.T) {
 
 func TestReadPathList(t *testing.T) {
 	logger := slog.Default()
-	gim := ReadIDMap[types.GeneID, types.GeneName]("testdata/gene-ids")
+	gim := ReadIDMap[types.GeneID, types.GeneName](filepath.Join("testdata", "gene-ids"))
 	cutoff := 0.0
 	inputDir := "testdata"
-	outputDir := "testresult/ReadPathList"
+	outputDir := filepath.Join("testresult", "ReadPathList")
 
 	// Ensure the output directory exists
 	if err := os.MkdirAll(outputDir, os.ModePerm); err != nil {
