@@ -62,9 +62,7 @@ GoNetic has three subcommands:
 - `./gonetic EQTL -h`: GoNetic looks for paths between mutations across samples, and for paths from mutations to differentially expressed genes within samples.
 - `./gonetic expression -h`: GoNetic looks for paths between differentially expressed genes within samples.
 
-### example
-`./gonetic QTL -q etc -n sample/network.txt -d sample/mutations.csv -o output`
-Other parameters are optional.
+All three subcommands are illustrated in the script `run-example.sh`, using the data in `example-data`.
 
 ### file formats
 The mutations file is a tab or comma separated file with a header line that starts with a `#`-character. The following columns are required:
@@ -84,25 +82,37 @@ Interaction entries have 5 columns:
  - "directed" for directed interactions, or "undirected" for bidirectional interactions
  - an edge weight between 0 and 1
 
-Example files can be found in the `sample` folder, here we show the header and the first 2 entries of these files.
- - mutations.csv:
+Example files can be found in the `example-data` folder, here we show the header and the first 2 entries of these files.
+- expression.csv
 ```
-#gene name,condition,functional score,freq increase
-PRDM16,Ls420,0.810177877122851,0.581176532205082
-WRAP73,NYU160,0.816136367036238,0.863155362397098
-```
- - network.txt [4]:
-```
-% pp non-regulatory
-% pd regulatory
-A2M,APOA1,pp,directed,1.0
-A2M,BMP1,pp,directed,1.0
+#gene name,lfc,pval,condition
+gene_530,-1.03334259198456e-06,0.211525759416019,sample_4
 ```
 
-The main output files are in the `output/resulting_networks/sample-norm` folder:
- - `d3js_visualization`: a html+js visualisation of the resulting network, tested in Firefox and Chromium-based browsers.
- - `weighted.network`: a tab separated file containing the resulting network. The same type of header lines as in the input network file, each entry now consists of two columns: (1) an unweighted interaction in the same format as the input network file, and (2) the highest edge penalty for which this interaction was selected in the subnetwork selection phase.
- - `conditionSpecificMutationRanking.txt`: a tab separated file containing all genes that are in the resulting network that are also mutated in the input data. The rank of the gene is based on the highest edge penalty for which this gene was selected in the subnetwork selection phase, where rank "1" corresponds with the highest edge penalty that lead to a valid subnetwork.
+- mutations.csv
+```
+#gene name,reference,alternative,chrom,start,end,freq increase,functional score,condition
+gene_624,C,-,1,953261,953261,0.0779220779220779,1.0,sample_1
+```
+
+- network.csv
+```
+% pp non-regulatory
+gene_853,gene_123,pp,directed,0.84
+```
+
+- targets.csv
+```
+#gene name,lfc,pval,condition
+gene_750,3.50871582582474,0.000154767761237015,sample_4
+```
+
+After running the script `run-example.sh` the output can be found in the `example-result/` folder, where there is one subdirectory per command. In these subdirectories the main result files can be found in `resulting_networks/normsum`:
+ - `d3js_visualization`: a html+js visualisation of the resulting network.
+ - `weighted.network`: a tab separated file containing the resulting network.
+ - `conditionSpecificMutationRanking.txt`: a tab separated file containing all genes that are in the resulting network that are also mutated in the input data. The genes are ranked based on the cumulative score of paths in this subnetwork that start in this gene.
+ - `conditionSpecificDeRanking.txt`: a tab separated file containing all genes that are in the resulting network that are also differentially expressed in the input data. The genes are ranked based on the cumulative score of paths in this subnetwork that start in this gene.
+
 
 ### visualization
 #### gene sets
